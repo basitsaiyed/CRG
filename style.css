@@ -1,0 +1,528 @@
+/* Base styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Container utility */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Navigation styles */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1E3D59;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #1E3D59;
+}
+
+.btn-primary {
+  background-color: #1E3D59;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background-color: rgba(30, 61, 89, 0.9);
+}
+
+/* Hero section */
+.hero-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://public.readdy.ai/ai/img_res/fe6098b198fb4a75d5d879363aee582f.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: white;
+  margin-bottom: 2rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Benefits section */
+.benefits-section {
+  padding: 5rem 0;
+  background-color: #f9fafb;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: #4b5563;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.benefit-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(30, 61, 89, 0.1);
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+}
+
+.benefit-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.benefit-description {
+  color: #4b5563;
+}
+
+/* Team section */
+.team-section {
+  padding: 5rem 0;
+  background-color: white;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.team-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.team-image-container {
+  position: relative;
+}
+
+.team-image {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  object-position: top;
+}
+
+.team-info {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(30, 61, 89, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.team-card:hover .team-info {
+  opacity: 1;
+}
+
+.team-quote {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.team-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 9999px;
+  text-decoration: none;
+}
+
+.social-icon {
+  color: #1E3D59;
+}
+
+.team-details {
+  padding: 1.5rem;
+}
+
+.team-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.team-role {
+  color: #4b5563;
+}
+
+/* Meetings section */
+.meetings-section {
+  padding: 5rem 0;
+  background-color: #f9fafb;
+}
+
+.meetings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.meeting-details {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.meeting-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.meeting-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.meeting-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(30, 61, 89, 0.1);
+  border-radius: 9999px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.meeting-label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.meeting-value {
+  color: #4b5563;
+}
+
+.btn-full {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  margin-top: 2rem;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Footer */
+.footer {
+  background-color: #1f2937;
+  color: white;
+  padding: 3rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-tagline {
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #374151;
+  border-radius: 9999px;
+  transition: background-color 0.3s;
+}
+
+.footer-social-link:hover {
+  background-color: #1E3D59;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-link {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.contact-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.contact-text {
+  color: #9ca3af;
+}
+
+.footer-border {
+  border-top: 1px solid #374151;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.copyright {
+  color: #9ca3af;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .button-group {
+    flex-direction: row;
+  }
+  
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .benefits-grid,
+  .team-grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .meetings-container {
+    flex-direction: row;
+  }
+  
+  .meeting-details {
+    width: 50%;
+  }
+  
+  #map {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile menu */
+.menu-button {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .menu-button {
+    display: none;
+  }
+  
+  .nav-links {
+    display: flex;
+  }
+}
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 40;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 0.75rem 0;
+  color: #4b5563;
+  text-decoration: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-menu-link:last-child {
+  border-bottom: none;
+}
+
+/* Add for the 7th team member positioning */
+@media (min-width: 1024px) {
+  .team-center {
+    grid-column: 2;
+  }
+}

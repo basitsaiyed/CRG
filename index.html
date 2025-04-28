@@ -4,54 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CRG Toastmasters Club - Develop your public speaking and leadership skills in a supportive environment">
     <title>CRG Toastmasters Club</title>
-    
-    <!-- Production Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>
-        tailwind.config = { 
-            theme: { 
-                extend: { 
-                    colors: { 
-                        primary: '#1E3D59', 
-                        secondary: '#17A2B8' 
-                    }, 
-                    borderRadius: { 
-                        'none': '0px', 
-                        'sm': '4px', 
-                        DEFAULT: '8px', 
-                        'md': '12px', 
-                        'lg': '16px', 
-                        'xl': '20px', 
-                        '2xl': '24px', 
-                        '3xl': '32px', 
-                        'full': '9999px', 
-                        'button': '8px' 
-                    },
-                    maxWidth: {
-                        'screen-narrow': '1300px' // Custom narrower max-width
-                    }
-                } 
-            } 
-        }
-    </script>
-
-    <!-- Fonts -->
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#1E3D59', secondary: '#17A2B8' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.min.css" rel="stylesheet">
-    
-    <!-- Maps -->
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Replace your current TomTom scripts with these -->
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
-    
     <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
+        }
+
+        .marker-image {
+            cursor: pointer;
+            transform: translate(-50%, -50%);
         }
 
         .hero-section {
@@ -69,77 +45,39 @@
             opacity: 1;
         }
 
+        input:focus {
+            outline: none;
+            border-color: rgba(30, 61, 89, 0.9);
+        }
+
         #map {
             height: 400px;
             width: 100%;
             border-radius: 8px;
         }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #1E3D59;
-            z-index: 100;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        /* Preload transition for smoother page load */
-        .preload {
-            transition: none !important;
-        }
-
-        /* Custom marker styling */
-        .custom-marker {
-            cursor: pointer;
-            transform: translate(-50%, -100%);
-        }
     </style>
 </head>
 
-<body class="min-h-screen preload">
+<body class="min-h-screen">
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-primary">CRG Toastmasters Club</a>
-            <div class="hidden md:flex items-center space-x-8"> 
+            <a href="#" class="text-2xl font-bold text-primary">CRG Toastmasters Club</a>
+            <div class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="text-gray-700 hover:text-primary transition-colors">Home</a>
                 <a href="#benefits" class="text-gray-700 hover:text-primary transition-colors">Benefits</a>
                 <a href="#team" class="text-gray-700 hover:text-primary transition-colors">Our Team</a>
                 <a href="#meetings" class="text-gray-700 hover:text-primary transition-colors">Meetings</a>
-<!--                 <button
-                    class="bg-primary text-white px-6 py-2 rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Join
+                <!-- <button
+                    class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+                    href="#meetings">Join
                     Now</button> -->
             </div>
-            <div class="md:hidden menu-button cursor-pointer">
-                <i class="ri-menu-line text-2xl"></i>
+            <div class="menu-button">
+                <i class="ri-menu-line ri-2x"></i>
             </div>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="flex justify-end mb-8">
-            <i class="ri-close-line text-white text-3xl cursor-pointer close-menu"></i>
-        </div>
-        <div class="flex flex-col items-center space-y-6">
-            <a href="#home" class="text-white text-xl hover:text-gray-300 transition-colors mobile-link">Home</a>
-            <a href="#benefits" class="text-white text-xl hover:text-gray-300 transition-colors mobile-link">Benefits</a>
-            <a href="#team" class="text-white text-xl hover:text-gray-300 transition-colors mobile-link">Our Team</a>
-            <a href="#meetings" class="text-white text-xl hover:text-gray-300 transition-colors mobile-link">Meetings</a>
-<!--             <button
-                class="bg-white text-primary px-6 py-2 rounded-button hover:bg-gray-200 transition-colors whitespace-nowrap mt-4">Join
-                Now</button> -->
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section min-h-screen flex items-center justify-center pt-16">
@@ -148,16 +86,22 @@
             <p class="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">Develop your speaking & leadership skills
                 in a supportive and engaging environment</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button
-                    class="bg-primary text-white px-8 py-3 rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap text-lg font-medium">Join
-                    Us In the Next Meet</button>
+                <a href="#meetings"
+                    class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap text-lg font-medium inline-block">
+                    Join Us In the Next Meet
+                </a>
+
+
+                <!-- <button
+                    class="bg-white text-primary px-8 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap text-lg font-medium">Learn
+                    More</button> -->
             </div>
         </div>
     </section>
 
     <!-- Benefits Section -->
     <section id="benefits" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4 max-w-screen-narrow">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Join CRG Toastmasters?</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Our club offers a supportive environment where you can
@@ -165,61 +109,60 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Benefit Card Template -->
+                <!-- Benefit 1 -->
                 <div class="benefit-card bg-white p-8 rounded shadow-md transition-all duration-300">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-user-voice-line text-primary text-2xl"></i>
+                        <i class="ri-user-voice-line text-primary ri-2x"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Public Speaking Confidence</h3>
                     <p class="text-gray-600">Overcome fear and anxiety about speaking in public through regular practice
                         in a supportive environment.</p>
                 </div>
 
-                <!-- Other benefit cards would be similar structure -->
-                <!-- Leadership Skills -->
+                <!-- Benefit 2 -->
                 <div class="benefit-card bg-white p-8 rounded shadow-md transition-all duration-300">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-team-line text-primary text-2xl"></i>
+                        <i class="ri-team-line text-primary ri-2x"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Leadership Skills</h3>
                     <p class="text-gray-600">Develop essential leadership abilities by taking on various club roles and
                         participating in team projects.</p>
                 </div>
 
-                <!-- Personal Growth -->
+                <!-- Benefit 3 -->
                 <div class="benefit-card bg-white p-8 rounded shadow-md transition-all duration-300">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-rocket-line text-primary text-2xl"></i>
+                        <i class="ri-rocket-line text-primary ri-2x"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Personal Growth</h3>
                     <p class="text-gray-600">Challenge yourself to step outside your comfort zone and achieve personal
                         development goals.</p>
                 </div>
 
-                <!-- Networking -->
+                <!-- Benefit 4 -->
                 <div class="benefit-card bg-white p-8 rounded shadow-md transition-all duration-300">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-links-line text-primary text-2xl"></i>
+                        <i class="ri-links-line text-primary ri-2x"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Networking</h3>
                     <p class="text-gray-600">Connect with like-minded professionals from diverse backgrounds and
                         industries.</p>
                 </div>
 
-                <!-- Professional Development -->
+                <!-- Benefit 5 -->
                 <div class="benefit-card bg-white p-8 rounded shadow-md transition-all duration-300">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-briefcase-4-line text-primary text-2xl"></i>
+                        <i class="ri-briefcase-4-line text-primary ri-2x"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Professional Development</h3>
                     <p class="text-gray-600">Enhance your resume with valuable communication and leadership skills
                         sought by employers.</p>
                 </div>
 
-                <!-- Constructive Feedback -->
+                <!-- Benefit 6 -->
                 <div class="benefit-card bg-white p-8 rounded shadow-md transition-all duration-300">
                     <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-feedback-line text-primary text-2xl"></i>
+                        <i class="ri-feedback-line text-primary ri-2x"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-3">Constructive Feedback</h3>
                     <p class="text-gray-600">Receive personalized evaluation and guidance to improve your communication
@@ -230,7 +173,7 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-20 bg-white px-3 ">
+    <section id="team" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Leadership Team</h2>
@@ -238,12 +181,12 @@
                     exceptional experience for all members.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <!-- Team Member Template -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
                 <div class="team-card bg-white rounded shadow-md overflow-hidden">
                     <div class="relative">
-                        <img src="https://public.readdy.ai/ai/img_res/302664c0530c267a85f917ba6cdbd0f2.jpg"
-                            alt="Sarah Johnson" class="w-full h-80 object-cover object-top">
+                        <img src="Prakhar.jpeg" alt="Sarah Johnson"
+                            class="w-full h-80 object-cover object-top">
                         <div
                             class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
                             <p class="text-white text-center mb-4">"I'm passionate about helping others discover their
@@ -262,175 +205,185 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold">Sarah Johnson</h3>
-                        <p class="text-gray-600">President</p>
-                    </div>
-                </div>
-                <div class="team-card bg-white rounded shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="https://public.readdy.ai/ai/img_res/302664c0530c267a85f917ba6cdbd0f2.jpg"
-                            alt="Sarah Johnson" class="w-full h-80 object-cover object-top">
-                        <div
-                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
-                            <p class="text-white text-center mb-4">"I'm passionate about helping others discover their
-                                voice and develop confidence in public speaking."</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-linkedin-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-twitter-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-mail-line text-primary"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Sarah Johnson</h3>
-                        <p class="text-gray-600">President</p>
-                    </div>
-                </div>
-                <div class="team-card bg-white rounded shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="https://public.readdy.ai/ai/img_res/302664c0530c267a85f917ba6cdbd0f2.jpg"
-                            alt="Sarah Johnson" class="w-full h-80 object-cover object-top">
-                        <div
-                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
-                            <p class="text-white text-center mb-4">"I'm passionate about helping others discover their
-                                voice and develop confidence in public speaking."</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-linkedin-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-twitter-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-mail-line text-primary"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Sarah Johnson</h3>
-                        <p class="text-gray-600">President</p>
-                    </div>
-                </div>
-                <div class="team-card bg-white rounded shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="https://public.readdy.ai/ai/img_res/302664c0530c267a85f917ba6cdbd0f2.jpg"
-                            alt="Sarah Johnson" class="w-full h-80 object-cover object-top">
-                        <div
-                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
-                            <p class="text-white text-center mb-4">"I'm passionate about helping others discover their
-                                voice and develop confidence in public speaking."</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-linkedin-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-twitter-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-mail-line text-primary"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Sarah Johnson</h3>
-                        <p class="text-gray-600">President</p>
-                    </div>
-                </div>
-                <div class="team-card bg-white rounded shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="https://public.readdy.ai/ai/img_res/302664c0530c267a85f917ba6cdbd0f2.jpg"
-                            alt="Sarah Johnson" class="w-full h-80 object-cover object-top">
-                        <div
-                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
-                            <p class="text-white text-center mb-4">"I'm passionate about helping others discover their
-                                voice and develop confidence in public speaking."</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-linkedin-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-twitter-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-mail-line text-primary"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Sarah Johnson</h3>
-                        <p class="text-gray-600">President</p>
-                    </div>
-                </div>
-                <div class="team-card bg-white rounded shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img src="https://public.readdy.ai/ai/img_res/302664c0530c267a85f917ba6cdbd0f2.jpg"
-                            alt="Sarah Johnson" class="w-full h-80 object-cover object-top">
-                        <div
-                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
-                            <p class="text-white text-center mb-4">"I'm passionate about helping others discover their
-                                voice and develop confidence in public speaking."</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-linkedin-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-twitter-fill text-primary"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                                    <i class="ri-mail-line text-primary"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold">Sarah Johnson</h3>
+                        <h3 class="text-xl font-semibold">Prakhar Verma</h3>
                         <p class="text-gray-600">President</p>
                     </div>
                 </div>
 
-                <!-- Other team member cards follow the same pattern -->
-                <!-- Team positions would include: VP Education, VP Membership, VP Public Relations, Secretary, Treasurer, and Sergeant at Arms -->
-                
-                <!-- For center-aligned Sergeant at Arms in the last row -->
+                <!-- Team Member 2 -->
+                <div class="team-card bg-white rounded shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="Megha.jpeg" alt="David Chen"
+                            class="w-full h-80 object-cover object-top">
+                        <div
+                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
+                            <p class="text-white text-center mb-4">"Education is the foundation of growth. I enjoy
+                                creating learning opportunities for our members."</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-linkedin-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-twitter-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold">Megha Bhatt</h3>
+                        <p class="text-gray-600">VP Education</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-card bg-white rounded shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="Harsh.jpeg" alt="Michelle Williams"
+                            class="w-full h-80 object-cover object-top">
+                        <div
+                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
+                            <p class="text-white text-center mb-4">"I love welcoming new members and helping them
+                                integrate into our supportive community."</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-linkedin-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-twitter-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold">Harsh Raval</h3>
+                        <p class="text-gray-600">VP Membership</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-card bg-white rounded shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="Arun.jpeg" alt="Carlos Rodriguez"
+                            class="w-full h-80 object-cover object-top">
+                        <div
+                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
+                            <p class="text-white text-center mb-4">"My goal is to share our club's success stories and
+                                attract new members to our community."</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-linkedin-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-twitter-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold">Arun</h3>
+                        <p class="text-gray-600">VP Public Relations</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-card bg-white rounded shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="Pranita.jpeg" alt="Priya Patel"
+                            class="w-full h-80 object-cover object-top">
+                        <div
+                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
+                            <p class="text-white text-center mb-4">"I ensure our meetings run smoothly and all important
+                                information is documented for our members."</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-linkedin-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-twitter-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold">Pranita</h3>
+                        <p class="text-gray-600">Secretary</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="team-card bg-white rounded shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="shrimohan.jpeg" alt="Robert Thompson"
+                            class="w-full h-80 object-cover object-top">
+                        <div
+                            class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
+                            <p class="text-white text-center mb-4">"I manage our club's finances to ensure we have the
+                                resources needed for our activities and growth."</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-linkedin-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-twitter-fill text-primary"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold">Shrimohan</h3>
+                        <p class="text-gray-600">Treasurer</p>
+                    </div>
+                </div>
+                <!-- Add this wrapper div around the 7th team member -->
                 <div class="col-span-1 md:col-span-2 lg:col-span-1 mx-auto lg:mx-0 lg:col-start-2">
+                    <!-- Team Member 7 -->
                     <div class="team-card bg-white rounded shadow-md overflow-hidden">
                         <div class="relative">
-                            <img src="https://public.readdy.ai/ai/img_res/d6484bdeb003cc43bb4258c9c27fbd1d.jpg"
-                                alt="Robert Thompson" class="w-full h-80 object-cover object-top">
+                            <img src="Saurav.jpeg" alt="Robert Thompson"
+                                class="w-full h-80 object-cover object-top">
                             <div
                                 class="team-info absolute inset-0 bg-primary bg-opacity-80 flex flex-col justify-center items-center p-6 opacity-0 transition-opacity duration-300">
-                                <p class="text-white text-center mb-4">"I keeps track of the club's physical properties
-                                    and ensures a positive meeting environment."</p>
+                                <p class="text-white text-center mb-4">"I Keeps track of the club's physical properties
+                                    and ensures a positive meeting environment.
+                                    "</p>
                                 <div class="flex space-x-4">
-                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <a href="#"
+                                        class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
                                         <i class="ri-linkedin-fill text-primary"></i>
                                     </a>
-                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <a href="#"
+                                        class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
                                         <i class="ri-twitter-fill text-primary"></i>
                                     </a>
-                                    <a href="#" class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                                    <a href="#"
+                                        class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
                                         <i class="ri-mail-line text-primary"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold">Robert Thompson</h3>
+                            <h3 class="text-xl font-semibold">Saurav Asija</h3>
                             <p class="text-gray-600">Sergeant at Arms</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Meeting Information Section -->
@@ -442,13 +395,14 @@
                     Visitors are always welcome!</p>
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex flex-col lg:flex-row gap-8 ">
                 <div class="lg:w-1/2 bg-white p-8 rounded shadow-md">
                     <h3 class="text-2xl font-semibold mb-6">Meeting Details</h3>
 
                     <div class="flex items-start mb-6">
-                        <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
-                            <i class="ri-map-pin-line text-primary text-lg"></i>
+                        <div
+                            class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
+                            <i class="ri-map-pin-line text-primary ri-lg"></i>
                         </div>
                         <div>
                             <h4 class="font-semibold mb-1">Location</h4>
@@ -458,8 +412,9 @@
                     </div>
 
                     <div class="flex items-start mb-6">
-                        <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
-                            <i class="ri-time-line text-primary text-lg"></i>
+                        <div
+                            class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
+                            <i class="ri-time-line text-primary ri-lg"></i>
                         </div>
                         <div>
                             <h4 class="font-semibold mb-1">Schedule</h4>
@@ -468,8 +423,9 @@
                     </div>
 
                     <div class="flex items-start mb-6">
-                        <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
-                            <i class="ri-calendar-line text-primary text-lg"></i>
+                        <div
+                            class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
+                            <i class="ri-calendar-line text-primary ri-lg"></i>
                         </div>
                         <div>
                             <h4 class="font-semibold mb-1">Duration</h4>
@@ -478,45 +434,72 @@
                     </div>
 
                     <div class="flex items-start">
-                        <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
-                            <i class="ri-phone-line text-primary text-lg"></i>
+                        <div
+                            class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mr-4 flex-shrink-0">
+                            <i class="ri-phone-line text-primary ri-lg"></i>
                         </div>
                         <div>
                             <h4 class="font-semibold mb-1">Contact</h4>
-                            <p class="text-gray-600">membership@crgtoastmasters.org</p>
-                            <p class="text-gray-600">(555) 123-4567</p>
+                            <p class="text-gray-600">crgtoastmasters@gmail.com</p>
+                            <p class="text-gray-600"><b>Harsh Raval, VP Membership</b></p>
+                            <p class="text-gray-600">+91 884 936 0867</p>
+                            <p class="text-gray-600"><b>RK sir, Club Sponsor</b></p>
+                            <p class="text-gray-600">+91 85115 34392</p>
+                            <p class="text-gray-600"><b>Prakhar Verma, Club President</b></p>
+                            <p class="text-gray-600">+91 84693 65643</p>
                         </div>
                     </div>
 
-                    <div class="mt-8">
-                        <button class="bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap w-full">RSVP
+                    <!-- <div class="mt-8">
+                        <button
+                            class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap w-full">RSVP
                             for Next Meeting</button>
-                    </div>
+                    </div> -->
                 </div>
 
-                <div id="map" class="lg:w-1/2 rounded"></div>
+                <!-- In your HTML, update the map div with inline dimensions -->
+                <div id="map" style="height: 400px; width: 100%; border-radius: 8px;"></div>
             </div>
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <!-- <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
+                <p class="text-gray-600 mb-8">Subscribe to our newsletter to receive updates about upcoming meetings, events, and club news.</p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Enter your email" class="flex-grow px-6 py-3 rounded border border-gray-300 focus:border-primary">
+                    <button class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
                     <h3 class="text-xl font-semibold mb-4">CRG Toastmasters</h3>
                     <p class="text-gray-400 mb-4">"Where Leaders Are Made"</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
                             <i class="ri-facebook-fill"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
                             <i class="ri-twitter-fill"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
                             <i class="ri-linkedin-fill"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
+                        <a href="#"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-700 rounded-full hover:bg-primary transition-colors">
                             <i class="ri-instagram-line"></i>
                         </a>
                     </div>
@@ -525,11 +508,15 @@
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">About Toastmasters</a></li>
-                        <li><a href="#benefits" class="text-gray-400 hover:text-white transition-colors">Membership Benefits</a></li>
-                        <li><a href="#team" class="text-gray-400 hover:text-white transition-colors">Leadership Team</a></li>
-                        <li><a href="#meetings" class="text-gray-400 hover:text-white transition-colors">Meeting Schedule</a></li>
-<!--                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li> -->
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Toastmasters</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Membership Benefits</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Leadership Team</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Meeting Schedule</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
 
@@ -540,25 +527,26 @@
                             <div class="w-5 h-5 flex items-center justify-center mr-2 mt-1">
                                 <i class="ri-map-pin-line text-primary"></i>
                             </div>
-                            <span class="text-gray-400">Harmony Living Ed Value Chain Solutions, E-329, 3rd Floor, Pramukh Anand Orbit Mall, Kudasan</span>
+                            <span class="text-gray-400">123 Toastmasters Hall, Cityville</span>
                         </li>
                         <li class="flex items-start">
                             <div class="w-5 h-5 flex items-center justify-center mr-2 mt-1">
                                 <i class="ri-mail-line text-primary"></i>
                             </div>
-                            <span class="text-gray-400">info@crgtoastmasters.org</span>
+                            <span class="text-gray-400">
+                                crgtoastmasters@gmail.com</span>
                         </li>
                         <li class="flex items-start">
                             <div class="w-5 h-5 flex items-center justify-center mr-2 mt-1">
                                 <i class="ri-phone-line text-primary"></i>
                             </div>
-                            <span class="text-gray-400">(555) 123-4567</span>
+                            <span class="text-gray-400">+91 884 936 0867</span>
                         </li>
                         <li class="flex items-start">
                             <div class="w-5 h-5 flex items-center justify-center mr-2 mt-1">
                                 <i class="ri-time-line text-primary"></i>
                             </div>
-                            <span class="text-gray-400">Every Sunday at 11:00 AM</span>
+                            <span class="text-gray-400">Every Wednesday at 7:00 PM</span>
                         </li>
                     </ul>
                 </div>
@@ -571,11 +559,6 @@
     </footer>
 
     <script>
-        // Remove preload class after page load to enable transitions
-        window.addEventListener('load', function() {
-            document.body.classList.remove('preload');
-        });
-
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -589,36 +572,21 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('.mobile-menu').classList.remove('active');
                 }
             });
         });
 
         // Mobile menu toggle
-        const menuButton = document.querySelector('.menu-button');
-        const closeButton = document.querySelector('.close-menu');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        if (menuButton && closeButton && mobileMenu) {
+        const menuButton = document.querySelector('.ri-menu-line');
+        if (menuButton) {
             menuButton.addEventListener('click', function () {
-                mobileMenu.classList.add('active');
-            });
-            
-            closeButton.addEventListener('click', function () {
-                mobileMenu.classList.remove('active');
-            });
-            
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('active');
-                });
+                // Mobile menu functionality would go here
+                alert('Mobile menu clicked');
             });
         }
 
-        // Initialize map
+        // MAP
+        // Replace your map initialization code with this
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof tt !== 'undefined') {
                 try {
@@ -653,82 +621,6 @@
                 document.getElementById('map').innerHTML = '<div class="p-6 bg-gray-200 text-center rounded"><p>Map service unavailable. Please try again later.</p></div>';
             }
         });
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     // Check if TomTom API is loaded
-        //     if (typeof tt !== 'undefined') {
-        //         try {
-        //             // Create map instance
-        //             const map = tt.map({
-        //                 key: 'supu8hAZdQgayQ7E3SfxLUK1M8ocVw7W',
-        //                 container: 'map',
-        //                 center: [72.63054749391392, 23.18436526489801],
-        //                 zoom: 15,
-        //                 style: 'tomtom://vector/1/basic-main'
-        //             });
-                    
-        //             // Add zoom controls
-        //             map.addControl(new tt.NavigationControl());
-
-        //             // Create custom marker element
-        //             const markerElement = document.createElement('div');
-        //             markerElement.className = 'custom-marker';
-        //             markerElement.innerHTML = `
-        //                 <svg width="40" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        //                     <path fill="#1E3D59" d="M12 0C7.58 0 4 3.58 4 8c0 5.5 8 16 8 16s8-10.5 8-16c0-4.42-3.58-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
-        //                     <circle cx="12" cy="8" r="3" fill="white"/>
-        //                 </svg>
-        //             `;
-
-        //             // Create marker and add popup
-        //             const marker = new tt.Marker({
-        //                 element: markerElement
-        //             })
-        //             .setLngLat([72.63054749391392, 23.18436526489801])
-        //             .addTo(map);
-                    
-        //             // Add popup to marker
-        //             const popup = new tt.Popup({ offset: 30, closeButton: false })
-        //                 .setHTML('<strong>CRG Toastmasters Club</strong><br>Pramukh Anand Orbit Mall, Kudasan')
-        //                 .setLngLat([72.63054749391392, 23.18436526489801]);
-                    
-        //             marker.setPopup(popup);
-        //             marker.togglePopup(); // Show popup by default
-                    
-        //             // Handle marker click
-        //             markerElement.addEventListener('click', function() {
-        //                 marker.togglePopup();
-        //             });
-
-        //         } catch (error) {
-        //             console.error("Error initializing map:", error);
-        //             document.getElementById('map').innerHTML = '<div class="p-6 bg-gray-200 text-center rounded"><p>Map loading error. Please try again later.</p></div>';
-        //         }
-        //     } else {
-        //         console.error("TomTom SDK not loaded");
-        //         document.getElementById('map').innerHTML = '<div class="p-6 bg-gray-200 text-center rounded"><p>Map service unavailable. Please try again later.</p></div>';
-        //     }
-        // });
-
-        // // Intersection Observer for animations
-        // const observerOptions = {
-        //     root: null,
-        //     rootMargin: '0px',
-        //     threshold: 0.1
-        // };
-
-        // const observer = new IntersectionObserver((entries) => {
-        //     entries.forEach(entry => {
-        //         if (entry.isIntersecting) {
-        //             entry.target.classList.add('animate-fade-in');
-        //             observer.unobserve(entry.target);
-        //         }
-        //     });
-        // }, observerOptions);
-
-        // // Observe sections
-        // document.querySelectorAll('section').forEach(section => {
-        //     observer.observe(section);
-        // });
     </script>
 </body>
 
